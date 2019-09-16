@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<recettes>
+  <recette>
+  	<nom>brioche coco</nom>
+  	<description>
+	  	1- mélangez le yaourt, la coco rapé et la farine de coco. Ensuite, insérez l'oeuf.
+	  	2- Faire cuire au micro onde pendant 1M30
+  	</description>
+  	<details>
+	  	<oeuf>1</oeuf>
+	  	<yaourt>1</yaourt>
+	  	<farine_de_coco>50</farine_de_coco>
+	  	<copeaux_de_coco>25</copeaux_de_coco>
+  	</details>
+  </recette>
+</recettes>

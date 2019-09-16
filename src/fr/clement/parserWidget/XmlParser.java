@@ -2,6 +2,7 @@ package fr.clement.parserWidget;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -61,9 +62,7 @@ public class XmlParser {
 		    if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) 
 		    {
 		      Element ingredient = (Element) racineNoeuds.item(i);
-			  System.out.println("\n*************INGREDIENT************");
 			  Element nom = (Element) ingredient.getElementsByTagName("nom").item(0);
-			  System.out.println("nom : " + nom.getTextContent());
 			  if(nom.getTextContent().equals(elementName)) {
 				  return ingredient;
 			  }
@@ -74,11 +73,14 @@ public class XmlParser {
 		  return null;
 	}
 	
-	public int findSubElement(Element parent, String childLabel, String label) {
+	public String getSpecificValueForElement(Element element, String baliseName) {
+		return element.getElementsByTagName(baliseName).item(0).getTextContent();
+	}
+	
+	public HashMap<String, String> findSubElement(Element parent, String childLabel) {
 		
-		int valeurNutriment=0;
-		
-		NodeList childs=parent.getElementsByTagName(childLabel);
+		HashMap<String, String> dictionnary = new HashMap<String, String>();
+		NodeList childs=parent.getElementsByTagName(childLabel); //on recupere nutriments
 		int nbRacineNoeuds = childs.getLength();
 		
 		for (int i = 0; i<nbRacineNoeuds; i++) 
@@ -86,14 +88,27 @@ public class XmlParser {
 			
 		    if(childs.item(i).getNodeType() == Node.ELEMENT_NODE) 
 		    {
-		    	Element nutriment = (Element) childs.item(i);
-		    	Element value = (Element) nutriment.getElementsByTagName(label).item(0);
-		    	valeurNutriment=Integer.parseInt(value.getTextContent());
-		    	System.out.println(label+" : " + valeurNutriment);
-		    	
-		    	return valeurNutriment;
+		    	Element element = (Element) childs.item(i);
+		    	if(element.getNodeName().equals(childLabel)) {
+		    		parcourirElemAndFillDictionnary(element.getChildNodes(),dictionnary);
+		    	}
 		    }
 		}
-		return valeurNutriment;
+		return dictionnary;
+	}
+	
+	private void parcourirElemAndFillDictionnary(NodeList elems, HashMap<String, String> dictionnary) {
+		int nbRacineNoeuds = elems.getLength();
+		for (int i = 0; i<nbRacineNoeuds; i++) 
+		{
+			
+		    if(elems.item(i).getNodeType() == Node.ELEMENT_NODE) 
+		    {
+		    	
+		    	Element value = (Element) elems.item(i);
+		    	dictionnary.put(value.getTagName(),value.getTextContent());
+
+		    }
+		}
 	}
 }
