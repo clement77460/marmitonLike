@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ingredients>
+  <!-- John DOE -->
+  <ingredient>
+    <nom>Oeuf</nom>
+    <nutriments>
+      <fibre>100</fibre>
+      <glucide>100</glucide>
+      <lipide>0</lipide>
+      <kcal>0</kcal>
+    </nutriments>
+  </ingredient>
+   <ingredient>
+    <nom>Viande</nom>
+    <nutriments>
+      <fibre>100</fibre>
+      <glucide>100</glucide>
+      <lipide>0</lipide>
+      <kcal>0</kcal>
+    </nutriments>
+  </ingredient>
+</ingredients>
