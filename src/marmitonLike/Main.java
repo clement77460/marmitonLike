@@ -7,7 +7,7 @@ public class Main {
 		
 		Engine engine=new Engine();
 		
-		engine.getSpecificRecette("brioche coco allege");
+		engine.getSpecificRecette("naan");
 		
 	}
 }

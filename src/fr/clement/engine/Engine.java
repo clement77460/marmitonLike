@@ -41,12 +41,13 @@ public class Engine {
 		this.fillRecetteWithIngredients(recette, ingredients);
 
 		recette.computeReceipeNutriments();
+		System.out.println(recette.getReceipeNutriments());
 		xmlDocument.readXML("./data/recettes.xml");
-		System.out.println("lol");
+
 		XmlParser<String, Element> parser2=new XmlParser<String,Element>(xmlDocument.getDocument());
 		HashMap<String, Element> recettes=new HashMap<String, Element>();
 		parser2.parcourirElemAndFillDictionnary(xmlDocument.getDocument().getDocumentElement().getChildNodes(),recettes,1);
-		System.out.println(recettes);
+
 		
 	}
 	

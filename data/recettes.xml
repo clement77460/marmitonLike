@@ -27,5 +27,16 @@
   	</details>
   </recette>
   
+  <recette>
+  	<nom>naan</nom>
+  	<description>
+	  	1- mélangez la farine de coco avec l'eau. Ensuite, insérez l'oeuf.
+	  	2- Faire cuire au micro onde pendant 4M, essayer plus longtemps
+  	</description>
+  	<details>
+	  	<eau>250</eau>
+	  	<farine_de_coco>125</farine_de_coco>
+  	</details>
+  </recette>  
   
 </recettes>
