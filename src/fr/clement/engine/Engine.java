@@ -25,7 +25,6 @@ public class Engine {
 	}
 	
 	public void getSpecificRecette(String labelRecette) {
-		System.out.println("***** Pour la recette : "+ labelRecette+" ******\n");
 		this.parser.readXML("./data/recettes.xml");
 		Element element=parser.findParentElement(labelRecette);
 		
@@ -34,10 +33,9 @@ public class Engine {
 		Recette recette=new Recette(labelRecette, description);
 		
 		this.fillRecetteWithIngredients(recette, ingredients);
-		System.out.println(recette.toString());
-		System.out.println("\n **** Fin de la recette Brioche coco :) ****");
 
-		
+		recette.computeReceipeNutriments();
+		System.out.println(recette.getReceipeNutriments());
 	}
 	
 	public void fillRecetteWithIngredients(Recette recette, HashMap<String, String> ingredients) {
