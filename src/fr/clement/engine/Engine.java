@@ -7,25 +7,31 @@ import org.w3c.dom.Element;
 
 import fr.clement.entities.Ingredient;
 import fr.clement.entities.Recette;
+import fr.clement.parserWidget.XmlDocument;
 import fr.clement.parserWidget.XmlParser;
 
 public class Engine {
-	private XmlParser parser;
+	private XmlDocument xmlDocument;
 	
 	public Engine() {
-		this.parser=new XmlParser();
+		this.xmlDocument=new XmlDocument();
 	}
 	
 
 	
 	public void getIngredient(Recette recette, String lablelIngredient, String portion) {
-		this.parser.readXML("./data/ingredients.xml");
+		xmlDocument.readXML("./data/ingredients.xml");
+		XmlParser<String, String> parser=new XmlParser<String,String>(xmlDocument.getDocument());
+		
 		Element element=parser.findParentElement(lablelIngredient);
 		recette.addIngredient(new Ingredient(lablelIngredient, portion, parser.findSubElement(element, "nutriments")));
 	}
 	
 	public void getSpecificRecette(String labelRecette) {
-		this.parser.readXML("./data/recettes.xml");
+		xmlDocument.readXML("./data/recettes.xml");
+		XmlParser<String, String> parser=new XmlParser<String,String>(xmlDocument.getDocument());
+		
+		
 		Element element=parser.findParentElement(labelRecette);
 		
 		String description=parser.getSpecificValueForElement(element, "description");//description recette
@@ -35,7 +41,13 @@ public class Engine {
 		this.fillRecetteWithIngredients(recette, ingredients);
 
 		recette.computeReceipeNutriments();
-		System.out.println(recette.getReceipeNutriments());
+		xmlDocument.readXML("./data/recettes.xml");
+		System.out.println("lol");
+		XmlParser<String, Element> parser2=new XmlParser<String,Element>(xmlDocument.getDocument());
+		HashMap<String, Element> recettes=new HashMap<String, Element>();
+		parser2.parcourirElemAndFillDictionnary(xmlDocument.getDocument().getDocumentElement().getChildNodes(),recettes,1);
+		System.out.println(recettes);
+		
 	}
 	
 	public void fillRecetteWithIngredients(Recette recette, HashMap<String, String> ingredients) {

@@ -44,5 +44,14 @@
     		<portion_moyenne>100</portion_moyenne>
   		</nutriments>
 	</ingredient>
-	 
+ 	<ingredient>
+  		<nom>eau</nom>
+  		<nutriments>
+    		<fibre>0</fibre>
+    		<glucide>0</glucide>
+    		<lipide>0</lipide>
+    		<kcal>0</kcal>
+    		<portion_moyenne>100</portion_moyenne>
+  		</nutriments>
+	</ingredient>	 
 </ingredients>

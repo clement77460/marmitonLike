@@ -13,4 +13,19 @@
 	  	<copeaux_de_coco>25</copeaux_de_coco>
   	</details>
   </recette>
+  
+  <recette>
+  	<nom>brioche coco allege</nom>
+  	<description>
+	  	1- mélangez la farine de coco avec l'eau. Ensuite, insérez l'oeuf.
+	  	2- Faire cuire au micro onde pendant 4M, essayer plus longtemps
+  	</description>
+  	<details>
+	  	<oeuf>1</oeuf>
+	  	<eau>190</eau>
+	  	<farine_de_coco>30</farine_de_coco>
+  	</details>
+  </recette>
+  
+  
 </recettes>

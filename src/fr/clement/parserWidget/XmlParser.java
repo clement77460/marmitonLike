@@ -14,36 +14,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class XmlParser {
-	private final DocumentBuilderFactory factory;
-	private DocumentBuilder builder;
+public class XmlParser<K,V> {
 	private Document document;
 	
-	public XmlParser() {
-		this.factory = DocumentBuilderFactory.newInstance();
-		this.createDocumentBuilder();
-	}
-	
-	private void createDocumentBuilder() {
-		try 
-		{
-		  this.builder = this.factory.newDocumentBuilder();
-		}
-		catch (final ParserConfigurationException e) 
-		{
-		  e.printStackTrace();
-		}
-	}
-	
-	public void readXML(String xmlName) {
-		try {
-			this.document= builder.parse(new File(xmlName));
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+	public XmlParser(Document document) {
+		this.document=document;
 	}
 	
 	public Element findParentElement(String elementName) {
@@ -77,12 +52,10 @@ public class XmlParser {
 		return element.getElementsByTagName(baliseName).item(0).getTextContent();
 	}
 	
-	public HashMap<String, String> findSubElement(Element parent, String childLabel) {
-		
-		HashMap<String, String> dictionnary = new HashMap<String, String>();
+	public HashMap<K, V> findSubElement(Element parent, String childLabel) {
+		HashMap<K, V> dictionnary = new HashMap<K, V>();
 		NodeList childs=parent.getElementsByTagName(childLabel); //on recupere nutriments
 		int nbRacineNoeuds = childs.getLength();
-		
 		for (int i = 0; i<nbRacineNoeuds; i++) 
 		{
 			
@@ -90,14 +63,17 @@ public class XmlParser {
 		    {
 		    	Element element = (Element) childs.item(i);
 		    	if(element.getNodeName().equals(childLabel)) {
-		    		parcourirElemAndFillDictionnary(element.getChildNodes(),dictionnary);
+		    		parcourirElemAndFillDictionnary(element.getChildNodes(),dictionnary,0);
 		    	}
 		    }
 		}
 		return dictionnary;
 	}
 	
-	private void parcourirElemAndFillDictionnary(NodeList elems, HashMap<String, String> dictionnary) {
+	
+	public void parcourirElemAndFillDictionnary(NodeList elems, HashMap<K, V> dictionnary, int option) {
+		// option =0 => fill String String
+		// option =1 => fill int Element
 		int nbRacineNoeuds = elems.getLength();
 		for (int i = 0; i<nbRacineNoeuds; i++) 
 		{
@@ -106,9 +82,28 @@ public class XmlParser {
 		    {
 		    	
 		    	Element value = (Element) elems.item(i);
-		    	dictionnary.put(value.getTagName(),value.getTextContent());
+		    	this.fillDictionnary(value,dictionnary,option);
+		    	
 
 		    }
 		}
 	}
+	private void fillDictionnary(Element elem, HashMap<K, V> dictionnary, int option) {
+		
+		if(option==0) {
+			dictionnary.put((K)elem.getTagName(),(V)elem.getTextContent());
+		}
+		else {
+			if(option==1) {
+				dictionnary.put((K)this.getSpecificValueForElement(elem,"nom"),(V)elem);
+			}
+		}
+		
+	}
+	
+	public void setDocument(Document document) {
+		this.document=document;
+	}
+	
+	
 }
