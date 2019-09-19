@@ -106,5 +106,16 @@ public class XmlParser<K,V> {
 		this.document=document;
 	}
 	
-	
+	public void addElement(Element racine,String labelNom) {
+		/**
+		 * <ingredients> => racine
+		 * 		<ingredient> => ingredient
+		 */
+		Element ingredient = document.createElement("ingredient");
+		racine.appendChild(ingredient);
+		
+		Element nutriments = document.createElement("nutriments");
+		Element nom = document.createElement("nom");
+		nom.appendChild(document.createTextNode(labelNom));
+	}
 }

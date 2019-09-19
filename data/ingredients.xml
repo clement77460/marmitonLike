@@ -76,4 +76,16 @@
 		    <portion_moyenne>100</portion_moyenne>
   		</nutriments>
 	</ingredient>	 
+	
+	<ingredient>
+  		<nom>farine_ble</nom>
+  		<nutriments>
+		    <fibre>4</fibre>
+		    <glucide>68</glucide>
+		    <lipide>1</lipide>
+		    <kcal>428</kcal>
+		    <portion_moyenne>100</portion_moyenne>
+  		</nutriments>
+	</ingredient>	
+	
 </ingredients>

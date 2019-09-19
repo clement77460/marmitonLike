@@ -102,4 +102,30 @@ public class Engine {
 		//a modifier pour meilleure encapsulation
 	}
 
+	public boolean isExisting(String label, int option) {
+		/**
+		 * Regarde si l'Element existe deja dans le fichier xml
+		 * 0: On regarde dans les ingredients
+		 * 1: On regarde dans les recettes
+		 */
+		
+		if(option==0)
+			xmlDocument.readXML("./data/ingredients.xml");
+		else
+			xmlDocument.readXML("./data/recettes.xml");
+		
+		XmlParser<String, String> parser=new XmlParser<String,String>(xmlDocument.getDocument());
+		Element element=parser.findParentElement(label);
+		
+		if(element==null)
+			return false;
+		return true;
+	}
+	
+	public void addElementIfNotExisting(String label, int option) {
+		if(!isExisting(label,option)) {
+			System.out.println("n'existe pas donc on ajoute !");
+			
+		}
+	}
 }

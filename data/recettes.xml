@@ -13,6 +13,19 @@
 	  	<copeaux_de_coco>25</copeaux_de_coco>
   	</details>
   </recette>
+
+  <recette>
+  	<nom>crepe coco</nom>
+  	<description>
+	  	1- 
+  	</description>
+  	<details>
+	  	<oeuf>3</oeuf>
+	  	<farine_de_coco>30</farine_de_coco>
+	  	<farine_ble>20</farine_ble>
+	  	<lait>150</lait>
+  	</details>
+  </recette>
   
   <recette>
   	<nom>brioche coco allege</nom>

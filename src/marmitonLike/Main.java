@@ -7,5 +7,6 @@ public class Main {
 		
 		Engine engine=new Engine();
 		engine.initApp();
+		//engine.addElementIfNotExisting("farine_ble", 0);
 	}
 }
