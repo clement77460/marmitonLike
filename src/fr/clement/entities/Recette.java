@@ -49,4 +49,8 @@ public class Recette {
 	public void setDescription(String description0) {
 		this.description=description0;
 	}
+	
+	public String getLabelRecette() {
+		return this.labelRecette;
+	}
 }

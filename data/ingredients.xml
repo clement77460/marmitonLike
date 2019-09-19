@@ -53,5 +53,27 @@
     		<kcal>0</kcal>
     		<portion_moyenne>100</portion_moyenne>
   		</nutriments>
+	</ingredient>	
+	
+	<ingredient>
+  		<nom>levure_boulanger</nom>
+  		<nutriments>
+		    <fibre>0</fibre>
+		    <glucide>4.5</glucide>
+		    <lipide>38</lipide>
+		    <kcal>512</kcal>
+		    <portion_moyenne>100</portion_moyenne>
+  		</nutriments>
+	</ingredient>
+
+	<ingredient>
+  		<nom>lait</nom>
+  		<nutriments>
+		    <fibre>0</fibre>
+		    <glucide>4.8</glucide>
+		    <lipide>1.5</lipide>
+		    <kcal>46</kcal>
+		    <portion_moyenne>100</portion_moyenne>
+  		</nutriments>
 	</ingredient>	 
 </ingredients>
