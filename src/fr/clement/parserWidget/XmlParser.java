@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XmlParser<K,V> {
+	
 	private Document document;
 	
 	public XmlParser(Document document) {
@@ -70,7 +71,6 @@ public class XmlParser<K,V> {
 		return dictionnary;
 	}
 	
-	
 	public void parcourirElemAndFillDictionnary(NodeList elems, HashMap<K, V> dictionnary, int option) {
 		// option =0 => fill String String
 		// option =1 => fill int Element
@@ -88,6 +88,7 @@ public class XmlParser<K,V> {
 		    }
 		}
 	}
+	
 	private void fillDictionnary(Element elem, HashMap<K, V> dictionnary, int option) {
 		
 		if(option==0) {

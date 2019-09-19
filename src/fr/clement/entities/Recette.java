@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 
 public class Recette {
-	private ArrayList<Ingredient> ingredients;
+	private IngredientWrapper ingredientsWrapper;
 	private String description;
 	private String labelRecette;
 	private HashMap<String, Double> receipeNutriments;
@@ -13,7 +13,7 @@ public class Recette {
 	public Recette(String labelRecette0, String description0) {
 		this.description=description0;
 		this.labelRecette=labelRecette0;
-		this.ingredients=new ArrayList<Ingredient>();
+		this.ingredientsWrapper=new IngredientWrapper();
 		this.receipeNutriments=new HashMap<String, Double>();
 		this.receipeNutriments.put("fibre", 0.0);
 		this.receipeNutriments.put("kcal",  0.0);
@@ -22,12 +22,12 @@ public class Recette {
 		this.receipeNutriments.put("poids_gramme",  0.0);
 	}
 	
-	public void addIngredient(Ingredient ingredient) {
-		this.ingredients.add(ingredient);
+	public void setIngredientWrapper(IngredientWrapper ingredientWrapper0) {
+		this.ingredientsWrapper=ingredientWrapper0;
 	}
 	
 	public void computeReceipeNutriments(){
-		for(Ingredient e : ingredients){
+		for(Ingredient e : ingredientsWrapper.getIngredients()){
 			this.receipeNutriments.put("fibre", e.getFibre()+this.receipeNutriments.get("fibre"));
 			this.receipeNutriments.put("kcal", e.getKcal()+this.receipeNutriments.get("kcal"));
 			this.receipeNutriments.put("lipide", e.getLipide()+this.receipeNutriments.get("lipide"));
@@ -40,11 +40,6 @@ public class Recette {
 		return this.receipeNutriments;
 	}
 	
-	@Override
-	public String toString() {
-		return "Recette [ingredients=" + ingredients + ", description=" + description + ", labelRecette=" + labelRecette
-				+ "]";
-	}
 
 	public void setDescription(String description0) {
 		this.description=description0;
