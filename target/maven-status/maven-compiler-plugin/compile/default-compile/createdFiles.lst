@@ -4,6 +4,8 @@ fr\clement\entities\RecetteWrapper.class
 fr\clement\entities\Ingredient.class
 marmitonLike\Main.class
 fr\clement\parserWidget\XmlDocument.class
+fr\clement\view\FxView.class
 fr\clement\view\MarmitonFrame.class
 fr\clement\entities\IngredientWrapper.class
+fr\clement\view\FxView$1.class
 fr\clement\parserWidget\XmlParser.class
