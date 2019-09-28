@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<ingredients>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ingredients>
 
 	<ingredient>
 		<nom>oeuf</nom>
@@ -44,6 +43,7 @@
     		<portion_moyenne>100</portion_moyenne>
   		</nutriments>
 	</ingredient>
+ 	
  	<ingredient>
   		<nom>eau</nom>
   		<nutriments>
@@ -88,4 +88,4 @@
   		</nutriments>
 	</ingredient>	
 	
-</ingredients>
+<ingredient><nutriments><lipide>0</lipide><kcal>0</kcal><portion_moyenne>0</portion_moyenne><glucide>0</glucide><fibre>0</fibre></nutriments><nom>test_ingredient</nom></ingredient></ingredients>

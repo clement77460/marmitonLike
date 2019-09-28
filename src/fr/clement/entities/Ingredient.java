@@ -3,6 +3,7 @@ package fr.clement.entities;
 import java.util.HashMap;
 
 public class Ingredient {
+	private HashMap<String, String> nutrimentsDictionnary;
 	private String label;
 	private String portionRecette;
 	private String portionNutriments;
@@ -14,6 +15,7 @@ public class Ingredient {
 	public Ingredient(String label0, String portion0, HashMap<String, String> dictionnary) {
 		this.label=label0;
 		this.portionRecette=portion0;
+		this.nutrimentsDictionnary=dictionnary;
 		this.kcal=dictionnary.get("kcal");
 		this.fibre=dictionnary.get("fibre");
 		this.glucide=dictionnary.get("glucide");
@@ -41,6 +43,14 @@ public class Ingredient {
 	}
 	public String getLabel() {
 		return this.label;
+	}
+	
+	public HashMap<String, String> getNutrimentsDictionnary() {
+		return nutrimentsDictionnary;
+	}
+
+	public void setNutrimentsDictionnary(HashMap<String, String> nutrimentsDictionnary) {
+		this.nutrimentsDictionnary = nutrimentsDictionnary;
 	}
 
 	@Override

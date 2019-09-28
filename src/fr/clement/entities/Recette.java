@@ -40,12 +40,18 @@ public class Recette {
 		return this.receipeNutriments;
 	}
 	
-
+	public IngredientWrapper getIngredientsWrapper() {
+		return this.ingredientsWrapper;
+	}
+	
 	public void setDescription(String description0) {
 		this.description=description0;
 	}
 	
 	public String getLabelRecette() {
 		return this.labelRecette;
+	}
+	public String getDescription() {
+		return description;
 	}
 }

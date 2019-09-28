@@ -1,12 +1,20 @@
 package fr.clement.parserWidget;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -106,16 +114,71 @@ public class XmlParser<K,V> {
 		this.document=document;
 	}
 	
-	public void addElement(Element racine,String labelNom) {
+	public void addIngredientElement(String labelNom, HashMap<String, String> elementDictionnary) {
 		/**
 		 * <ingredients> => racine
 		 * 		<ingredient> => ingredient
+		 * 			<nom></nom> => done
+		 * 			<nutriments>
+		 * 				<fibre>
+		 * 				....
+		 * 			</nutriments>
+		 * 		</ingredient>
+		 * 		....
 		 */
-		Element ingredient = document.createElement("ingredient");
-		racine.appendChild(ingredient);
 		
-		Element nutriments = document.createElement("nutriments");
-		Element nom = document.createElement("nom");
-		nom.appendChild(document.createTextNode(labelNom));
+		Element ingredient = document.createElement("ingredient");
+		
+		Element nutriments=this.createSimpleElement(ingredient, "nutriments");
+		
+		HashMap<String, String> test=new HashMap<String, String>();
+		test.put("nom", labelNom);
+		this.createElementWithText(ingredient, test);
+		this.createElementWithText(nutriments, elementDictionnary);
+		
+		document.getDocumentElement().appendChild(ingredient);
+		
 	}
+
+	public void addReceipeElement(HashMap<String, String> descNom, HashMap<String, String> elementDictionnary) {
+		/**
+		 *   <recette>
+			  	<nom></nom>
+			  	<description></description>
+			  	<details>
+				  	<ingredient1>
+				  	<ingredient2>
+				  	<ingredient3>
+			  	</details>
+	  		 </recette>
+		 */
+		Element recette = document.createElement("recette");
+		
+		this.createElementWithText(recette, descNom);
+		Element details=this.createSimpleElement(recette, "details");
+		this.createElementWithText(details, elementDictionnary);
+		
+		
+		document.getDocumentElement().appendChild(recette);
+	}
+	
+	public void createElementWithText(Element parent, HashMap<String, String> elementDictionnary) {
+		for(Entry<String, String> entry : elementDictionnary.entrySet()) {
+			String cle = entry.getKey();
+			String value = entry.getValue();
+			Element e = document.createElement(cle);
+			e.appendChild(document.createTextNode(value));
+			parent.appendChild(e);
+			
+		}
+
+	}
+	
+	public Element createSimpleElement(Element parent, String label) {
+		Element e = document.createElement(label);
+		parent.appendChild(e);
+		
+		return e;
+	}
+
 }

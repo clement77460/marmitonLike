@@ -1,9 +1,19 @@
 package fr.clement.engine;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import fr.clement.entities.Ingredient;
@@ -74,6 +84,30 @@ public class Engine {
 		RecetteWrapper recetteWrapper=this.computeEveryReceipes(recettes);
 		recetteWrapper.displayAllRecette();
 	}
+
+	public void addNewReceipe(Recette recette) {
+		
+		if(!this.isExisting(recette.getLabelRecette(), 1)) {
+			getIngredientThatIsNotExisting(recette.getIngredientsWrapper()).forEach((k)->{
+				this.addElement(k);
+			});
+			
+			this.addElement(recette);
+		}
+	}
+	
+	private ArrayList<Ingredient> getIngredientThatIsNotExisting(IngredientWrapper ingredients) {
+		
+		ArrayList<Ingredient> ingredientsToInsert=new ArrayList<Ingredient>();
+		
+		for(Ingredient ingredient : ingredients.getIngredients()) {
+			if(!this.isExisting(ingredient.getLabel(), 0)) {
+				ingredientsToInsert.add(ingredient);
+			}
+		}
+		
+		return ingredientsToInsert;
+	}
 	
 	private RecetteWrapper computeEveryReceipes(HashMap<String, Element> recettes) {
 		/**
@@ -122,10 +156,28 @@ public class Engine {
 		return true;
 	}
 	
-	public void addElementIfNotExisting(String label, int option) {
-		if(!isExisting(label,option)) {
-			System.out.println("n'existe pas donc on ajoute !");
+	public void addElement(Object obj) {
+		if(obj instanceof Ingredient) {
+			Ingredient ingredient = ((Ingredient)obj);
+			xmlDocument.readXML("./data/ingredients.xml");
+			XmlParser<String, String> parser=new XmlParser<String,String>(xmlDocument.getDocument());
 			
+			parser.addIngredientElement(ingredient.getLabel(),ingredient.getNutrimentsDictionnary());
+
+			xmlDocument.saveXML("./data/ingredients.xml");
+		}else {
+			Recette recette = ((Recette)obj);
+			xmlDocument.readXML("./data/recettes.xml");
+			XmlParser<String, String> parser=new XmlParser<String,String>(xmlDocument.getDocument());
+			
+			HashMap<String,String> nomDesc=new HashMap<String,String>();
+			nomDesc.put("nom",recette.getLabelRecette());
+			nomDesc.put("description", recette.getDescription());
+			parser.addReceipeElement(nomDesc,recette.getIngredientsWrapper().getIngredientsWithPortion());
+
+			xmlDocument.saveXML("./data/recettes.xml");
 		}
+		
+	
 	}
 }
