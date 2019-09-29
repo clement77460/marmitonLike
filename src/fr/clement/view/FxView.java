@@ -4,32 +4,65 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 public class FxView extends Application{
 	
+	private Stage primaryStage;
+	private BorderPane rootPane;
 	@Override
 	public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+        this.primaryStage=primaryStage;
+
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
 
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+        this.primaryStage.setTitle("Hello World!");
+        this.primaryStage.show();
+        this.setHomView();
+        this.setHeader();
+        this.setMiddlePane();
+	}
+	
+	public void setHomView() {
+		try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FxView.class.getResource("HomeView.fxml"));
+            
+            this.rootPane = (BorderPane ) loader.load();
+            Scene scene = new Scene(rootPane);
+            this.primaryStage.setScene(scene);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+	}
+	
+	public void setMiddlePane() {
+		try {
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FxView.class.getResource("MiddlePane.fxml"));
+			this.rootPane.setCenter((AnchorPane ) loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setHeader() {
+        try {
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FxView.class.getResource("ApplicationHeader.fxml"));
+			this.rootPane.setTop((AnchorPane ) loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 }
