@@ -1,10 +1,13 @@
 package fr.clement.view;
 import java.io.IOException;
 
+import fr.clement.controller.HomeController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -42,7 +45,7 @@ public class FxView extends Application{
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(FxView.class.getResource("HomeView.fxml"));
-            
+            HomeController controler = loader.getController();
             this.rootPane = (BorderPane ) loader.load();
             Scene scene = new Scene(rootPane);
             this.primaryStage.setScene(scene);
@@ -71,6 +74,17 @@ public class FxView extends Application{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void traverse(Node node, int level) {  
+		for (int i = 0; i < level; i++) {   
+			System.out.print(" "); 
+		}  
+		System.out.println(node.getClass());  
+		if (node instanceof Parent) {   
+			Parent parent = (Parent) node;   
+			parent.getChildrenUnmodifiable().forEach(n->traverse(n, level +1));  
+		} 
 	}
 	
 
