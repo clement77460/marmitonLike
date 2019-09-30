@@ -11,24 +11,33 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 public class FxView extends Application{
 	
 	private Stage primaryStage;
 	private BorderPane rootPane;
+	
 	@Override
-	public void start(Stage primaryStage) {
-        this.primaryStage=primaryStage;
-
-        
-
+	public void init() {
+		
+	}
+	
+	@Override
+	public void start(Stage primaryStage0) {
+        this.primaryStage=primaryStage0;
         this.primaryStage.setTitle("Hello World!");
         this.primaryStage.show();
-        this.setHomView();
+        
+        this.setHomeView();
         this.setHeader();
         this.setMiddlePane();
 	}
 	
-	public void setHomView() {
+	@Override
+	public void stop() {
+	}
+	
+	public void setHomeView() {
 		try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
