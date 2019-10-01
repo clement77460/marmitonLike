@@ -33,7 +33,8 @@ public class FxView extends Application{
         
         this.setHomeView();
         this.setHeader();
-        this.setMiddlePane();
+        //this.setMiddlePane();
+        this.setTableView();
 	}
 	
 	@Override
@@ -85,6 +86,16 @@ public class FxView extends Application{
 			Parent parent = (Parent) node;   
 			parent.getChildrenUnmodifiable().forEach(n->traverse(n, level +1));  
 		} 
+	}
+	
+	public void setTableView() {
+		try {
+        	FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FxView.class.getResource("TableViewPane.fxml"));
+			this.rootPane.setCenter((AnchorPane ) loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
